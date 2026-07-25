@@ -1,0 +1,16 @@
+import { AlertTriangle, CheckSquare, ClipboardList, Lightbulb, Mail } from "lucide-react";
+import { ActionItemsTable } from "@/components/meeting/action-items-table";
+import { EmailCard } from "@/components/meeting/email-card";
+import { LoadingSkeleton } from "@/components/meeting/loading-skeleton";
+import { SummaryCard } from "@/components/meeting/summary-card";
+
+type ResultsPanelProps = { status: "idle" | "loading" | "complete"; progress: number };
+
+const decisions = ["Launch Friday", "Freeze features Wednesday", "QA Thursday"];
+
+export function ResultsPanel({ status, progress }: ResultsPanelProps) {
+  const isLoading = status === "loading";
+  const isComplete = status === "complete";
+  if (status === "idle") return <aside className="flex min-h-[350px] items-center justify-center rounded-xl border border-dashed bg-muted/20 p-8 text-center"><div><span className="mx-auto grid size-11 place-items-center rounded-xl bg-primary/10 text-primary"><Lightbulb className="size-5" /></span><h2 className="mt-4 font-semibold">Your meeting insights will appear here</h2><p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-muted-foreground">Add a transcript, then generate a summary to see decisions, actions, and follow-up notes.</p></div></aside>;
+  return <aside className="space-y-4" aria-live="polite">{isLoading && <div className="rounded-xl border bg-card p-5 shadow-sm"><div className="flex items-center justify-between text-sm"><span className="font-medium">AI is analysing your meeting...</span><span className="text-muted-foreground">{progress}%</span></div><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary transition-all duration-1000 ease-out" style={{ width: `${progress}%` }} /></div></div>}<SummaryCard title="Executive Summary" icon={ClipboardList} isLoading={isLoading}>{isComplete && <p className="text-sm leading-6 text-muted-foreground">The team finalized the launch timeline and assigned responsibilities for development, testing, and deployment.</p>}</SummaryCard><SummaryCard title="Key Decisions" icon={CheckSquare} isLoading={isLoading}>{isComplete && <ul className="space-y-2 text-sm text-muted-foreground">{decisions.map((decision) => <li className="flex gap-2" key={decision}><span className="mt-2 size-1.5 rounded-full bg-primary" />{decision}</li>)}</ul>}</SummaryCard><SummaryCard title="Action Items" icon={CheckSquare} isLoading={isLoading}>{isComplete && <ActionItemsTable />}</SummaryCard><SummaryCard title="Risks" icon={AlertTriangle} isLoading={isLoading}>{isComplete && <p className="text-sm leading-6 text-muted-foreground">Possible deployment delay if QA uncovers critical issues.</p>}</SummaryCard>{isLoading ? <article className="rounded-xl border bg-card p-5 shadow-sm"><div className="flex items-center gap-2.5"><span className="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary"><Mail className="size-4" /></span><h3 className="font-semibold">Follow-up Email</h3></div><div className="mt-4 space-y-2.5"><LoadingSkeleton className="h-3.5 w-3/5" /><LoadingSkeleton className="h-3.5 w-full" /><LoadingSkeleton className="h-3.5 w-5/6" /></div></article> : isComplete ? <EmailCard /> : null}</aside>;
+}

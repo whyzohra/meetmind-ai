@@ -120,3 +120,7 @@ Vercel will use the Node.js 22-or-newer range in `package.json`, install from `p
 - Support audio upload, transcription, and speaker identification.
 - Export summaries to email, Slack, Notion, and project-management tools.
 - Add searchable meeting history, analytics, and usage monitoring.
+
+## AI-Assisted Development
+
+This project was developed using AI-assisted software engineering practices. AI was used to accelerate development, improve code quality, generate documentation, assist with debugging, and help create the CI/CD pipeline while all implementation decisions, testing, and final validation were performed by the developer.

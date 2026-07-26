@@ -19,11 +19,11 @@ jobs:
     steps:
       # Retrieves the exact revision associated with the push or pull request.
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Uses the supported Node.js version and caches npm's package cache.
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm

@@ -107,6 +107,12 @@ MeetMind AI requires no custom Vercel configuration. It uses Vercel's standard N
 
 Vercel will use the Node.js 22-or-newer range in `package.json`, install from `package-lock.json`, and create preview deployments for future pull requests. No environment variables are required for the mocked version of the application.
 
+## Live Demo
+
+**Application:** https://meetmind-ai-black.vercel.app/
+
+**Source Code:** https://github.com/whyzohra/meetmind-ai
+
 ## Future improvements
 
 - Connect a secure AI summarization API and persist meeting data.
